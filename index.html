@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For You ♡</title>
+<title>For When You Miss Me ♡</title>
 
 <style>
 * {
@@ -17,24 +17,98 @@ body {
   background: #f8eee9;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   font-family: Georgia, serif;
   color: #604848;
+  overflow-x: hidden;
 }
 
 .scene {
   width: 100%;
-  max-width: 700px;
+  max-width: 750px;
   text-align: center;
-  padding: 30px 20px;
+  padding: 45px 20px 80px;
 }
 
+/* Instruction */
 .instruction {
-  font-size: 16px;
+  font-size: 17px;
   letter-spacing: 1px;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
+  color: #765858;
 }
 
+/* Envelope area */
+.envelope-area {
+  position: relative;
+  width: 340px;
+  height: 270px;
+  margin: 0 auto;
+}
+
+/* Cute heart doodles */
+.heart {
+  position: absolute;
+  color: #e89a9f;
+  font-size: 24px;
+  z-index: 10;
+  pointer-events: none;
+  animation: floatHeart 3s ease-in-out infinite;
+}
+
+.heart.one {
+  top: 15px;
+  left: -45px;
+  transform: rotate(-15deg);
+}
+
+.heart.two {
+  top: 70px;
+  right: -45px;
+  font-size: 20px;
+  animation-delay: .5s;
+}
+
+.heart.three {
+  bottom: 25px;
+  left: -30px;
+  font-size: 17px;
+  animation-delay: 1s;
+}
+
+.heart.four {
+  bottom: 5px;
+  right: -35px;
+  font-size: 27px;
+  transform: rotate(12deg);
+  animation-delay: 1.5s;
+}
+
+.heart.five {
+  top: 20px;
+  left: 45px;
+  font-size: 15px;
+  animation-delay: 2s;
+}
+
+.heart.six {
+  top: 25px;
+  right: 45px;
+  font-size: 14px;
+  animation-delay: .8s;
+}
+
+@keyframes floatHeart {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(8deg);
+  }
+}
+
+/* Envelope */
 .envelope {
   position: relative;
   width: 340px;
@@ -44,7 +118,6 @@ body {
   perspective: 1000px;
 }
 
-/* Envelope body */
 .envelope-body {
   position: absolute;
   inset: 0;
@@ -54,7 +127,7 @@ body {
   overflow: hidden;
 }
 
-/* Envelope front folds */
+/* Front folds */
 .envelope-body::before {
   content: "";
   position: absolute;
@@ -63,11 +136,42 @@ body {
   width: 100%;
   height: 100%;
   background: #f0c9c5;
-  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(
+    0 0,
+    50% 55%,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
   z-index: 3;
 }
 
-/* Letter */
+/* Title on envelope */
+.envelope-title {
+  position: absolute;
+  top: 68px;
+  left: 30px;
+  right: 30px;
+  z-index: 6;
+  color: #6b4b4b;
+  font-size: 21px;
+  line-height: 1.35;
+  font-style: italic;
+}
+
+/* Little heart on envelope */
+.seal-heart {
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  bottom: 38px;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: #d97880;
+  text-shadow: 0 2px 3px rgba(80,40,40,.15);
+}
+
+/* Letter coming out */
 .letter {
   position: absolute;
   left: 8%;
@@ -82,7 +186,7 @@ body {
 }
 
 .letter h1 {
-  font-size: 24px;
+  font-size: 23px;
   font-weight: normal;
   margin: 25px 0 10px;
 }
@@ -105,7 +209,7 @@ body {
   z-index: 5;
 }
 
-/* Open state */
+/* Open animation */
 .envelope.open .flap {
   transform: rotateX(180deg);
 }
@@ -118,6 +222,7 @@ body {
   cursor: default;
 }
 
+/* Final letter */
 .final-letter {
   max-width: 600px;
   margin: 150px auto 0;
@@ -141,6 +246,7 @@ body {
   text-align: center;
   font-weight: normal;
   margin-bottom: 35px;
+  color: #765858;
 }
 
 .final-letter p {
@@ -154,10 +260,41 @@ body {
   font-style: italic;
 }
 
+/* Mobile */
 @media (max-width: 500px) {
+
+  .envelope-area {
+    width: 300px;
+  }
+
   .envelope {
     width: 290px;
     height: 190px;
+  }
+
+  .envelope-title {
+    top: 55px;
+    font-size: 18px;
+  }
+
+  .seal-heart {
+    bottom: 30px;
+  }
+
+  .heart.one {
+    left: -10px;
+  }
+
+  .heart.two {
+    right: -10px;
+  }
+
+  .heart.three {
+    left: 0;
+  }
+
+  .heart.four {
+    right: 0;
   }
 
   .final-letter {
@@ -175,16 +312,36 @@ body {
     ♡ Click the envelope to open ♡
   </div>
 
-  <div class="envelope" id="envelope">
+  <div class="envelope-area">
 
-    <div class="envelope-body"></div>
+    <!-- Heart doodles -->
+    <span class="heart one">♡</span>
+    <span class="heart two">♡</span>
+    <span class="heart three">♡</span>
+    <span class="heart four">♡</span>
+    <span class="heart five">♡</span>
+    <span class="heart six">♡</span>
 
-    <div class="letter">
-      <h1>For You ♡</h1>
-      <p>A little something from me...</p>
+    <div class="envelope" id="envelope">
+
+      <div class="envelope-body"></div>
+
+      <div class="letter">
+        <h1>For You ♡</h1>
+        <p>A little something from me...</p>
+      </div>
+
+      <div class="envelope-title">
+        For when you miss me ♡
+      </div>
+
+      <div class="seal-heart">
+        ♥
+      </div>
+
+      <div class="flap"></div>
+
     </div>
-
-    <div class="flap"></div>
 
   </div>
 
@@ -192,7 +349,7 @@ body {
 
     <h2>For You, When You Miss Me ♡</h2>
 
-    <p>Dear Dharsan,</p>
+    <p>My Love,</p>
 
     <p>
       If you're reading this, I'm guessing you miss me.
@@ -203,12 +360,12 @@ body {
       I hope you know that even when we're not together,
       there are so many tiny things that remind me of you.
       A song, a random place, something stupid that makes me
-      laugh because I know exactly what you'd say about it.
+      laugh because I know exactly what you'd say about it. You know how I do stuff pretending you're next to me whenever I miss you, always remember that you never leave my mind.
     </p>
 
     <p>
       I wish I could just magically appear beside you right now,
-      steal your hand, and sit with you like we always do.
+      steal your space, and cuddle with you like we always do.
     </p>
 
     <p>
