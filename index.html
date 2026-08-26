@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ♡</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f8eee9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, serif;
+  color: #604848;
+}
+
+.scene {
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.instruction {
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+.envelope {
+  position: relative;
+  width: 340px;
+  height: 220px;
+  margin: 0 auto;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+/* Envelope body */
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: #e9b9b5;
+  border-radius: 6px;
+  box-shadow: 0 15px 35px rgba(80, 45, 45, 0.2);
+  overflow: hidden;
+}
+
+/* Envelope front folds */
+.envelope-body::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: #f0c9c5;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  z-index: 3;
+}
+
+/* Letter */
+.letter {
+  position: absolute;
+  left: 8%;
+  width: 84%;
+  height: 180px;
+  top: 25px;
+  background: #fffdf5;
+  padding: 25px;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(70, 40, 40, 0.12);
+  transition: transform 1s ease;
+}
+
+.letter h1 {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 25px 0 10px;
+}
+
+.letter p {
+  font-size: 14px;
+}
+
+/* Flap */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 58%;
+  background: #dda8a5;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 1s ease;
+  z-index: 5;
+}
+
+/* Open state */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  transform: translateY(-145px);
+}
+
+.envelope.open {
+  cursor: default;
+}
+
+.final-letter {
+  max-width: 600px;
+  margin: 150px auto 0;
+  background: #fffdf5;
+  padding: 50px 45px;
+  text-align: left;
+  box-shadow: 0 12px 35px rgba(80, 45, 45, 0.15);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+  pointer-events: none;
+}
+
+.final-letter.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.final-letter h2 {
+  text-align: center;
+  font-weight: normal;
+  margin-bottom: 35px;
+}
+
+.final-letter p {
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.signature {
+  text-align: right;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+@media (max-width: 500px) {
+  .envelope {
+    width: 290px;
+    height: 190px;
+  }
+
+  .final-letter {
+    padding: 35px 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+  <div class="instruction" id="instruction">
+    ♡ Click the envelope to open ♡
+  </div>
+
+  <div class="envelope" id="envelope">
+
+    <div class="envelope-body"></div>
+
+    <div class="letter">
+      <h1>For You ♡</h1>
+      <p>A little something from me...</p>
+    </div>
+
+    <div class="flap"></div>
+
+  </div>
+
+  <div class="final-letter" id="finalLetter">
+
+    <h2>For You, When You Miss Me ♡</h2>
+
+    <p>Dear Dharsan,</p>
+
+    <p>
+      If you're reading this, I'm guessing you miss me.
+      And honestly, I probably miss you too.
+    </p>
+
+    <p>
+      I hope you know that even when we're not together,
+      there are so many tiny things that remind me of you.
+      A song, a random place, something stupid that makes me
+      laugh because I know exactly what you'd say about it.
+    </p>
+
+    <p>
+      I wish I could just magically appear beside you right now,
+      steal your hand, and sit with you like we always do.
+    </p>
+
+    <p>
+      Until then, consider this letter a tiny piece of me
+      being with you.
+    </p>
+
+    <p>
+      And yes, you are allowed to miss me.
+      But don't miss me <i>too</i> much. I'll be back. ♡
+    </p>
+
+    <p class="signature">
+      Love,<br>
+      Cecily ♡
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+const envelope = document.getElementById("envelope");
+const finalLetter = document.getElementById("finalLetter");
+const instruction = document.getElementById("instruction");
+
+envelope.addEventListener("click", function() {
+
+  if (envelope.classList.contains("open")) return;
+
+  envelope.classList.add("open");
+
+  instruction.innerHTML = "♡ Your letter is opening... ♡";
+
+  setTimeout(function() {
+    finalLetter.classList.add("show");
+    instruction.innerHTML = "♡ A little piece of me, for you ♡";
+  }, 1000);
+
+});
+</script>
+
+</body>
+</html>
