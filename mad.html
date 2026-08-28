@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For When You're Mad at Me 😤♡</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f8eee9;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: Georgia, serif;
+  color: #604848;
+  overflow-x: hidden;
+}
+
+.scene {
+  width: 100%;
+  max-width: 750px;
+  text-align: center;
+  padding: 45px 20px 80px;
+}
+
+.instruction {
+  font-size: 17px;
+  letter-spacing: 1px;
+  margin-bottom: 35px;
+  color: #765858;
+}
+
+.envelope-area {
+  position: relative;
+  width: 340px;
+  height: 270px;
+  margin: 0 auto;
+}
+
+/* Heart doodles */
+
+.heart {
+  position: absolute;
+  color: #e89a9f;
+  font-size: 24px;
+  z-index: 10;
+  pointer-events: none;
+  animation: floatHeart 3s ease-in-out infinite;
+}
+
+.heart.one {
+  top: 15px;
+  left: -45px;
+  transform: rotate(-15deg);
+}
+
+.heart.two {
+  top: 70px;
+  right: -45px;
+  font-size: 20px;
+  animation-delay: .5s;
+}
+
+.heart.three {
+  bottom: 25px;
+  left: -30px;
+  font-size: 17px;
+  animation-delay: 1s;
+}
+
+.heart.four {
+  bottom: 5px;
+  right: -35px;
+  font-size: 27px;
+  transform: rotate(12deg);
+  animation-delay: 1.5s;
+}
+
+.heart.five {
+  top: 20px;
+  left: 45px;
+  font-size: 15px;
+  animation-delay: 2s;
+}
+
+.heart.six {
+  top: 25px;
+  right: 45px;
+  font-size: 14px;
+  animation-delay: .8s;
+}
+
+@keyframes floatHeart {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(8deg);
+  }
+}
+
+/* Envelope */
+
+.envelope {
+  position: relative;
+  width: 340px;
+  height: 220px;
+  margin: 0 auto;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: #e9b9b5;
+  border-radius: 6px;
+  box-shadow: 0 15px 35px rgba(80, 45, 45, 0.2);
+  overflow: hidden;
+}
+
+.envelope-body::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: #f0c9c5;
+  clip-path: polygon(
+    0 0,
+    50% 55%,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+  z-index: 3;
+}
+
+/* Envelope title */
+
+.envelope-title {
+  position: absolute;
+  top: 62px;
+  left: 25px;
+  right: 25px;
+  z-index: 6;
+  color: #6b4b4b;
+  font-size: 20px;
+  line-height: 1.35;
+  font-style: italic;
+}
+
+/* Heart seal */
+
+.seal-heart {
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  bottom: 38px;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: #d97880;
+  text-shadow: 0 2px 3px rgba(80,40,40,.15);
+}
+
+/* Letter inside envelope */
+
+.letter {
+  position: absolute;
+  left: 8%;
+  width: 84%;
+  height: 180px;
+  top: 25px;
+  background: #fffdf5;
+  padding: 25px;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(70, 40, 40, 0.12);
+  transition: transform 1s ease;
+}
+
+.letter h1 {
+  font-size: 23px;
+  font-weight: normal;
+  margin: 25px 0 10px;
+}
+
+.letter p {
+  font-size: 14px;
+}
+
+/* Envelope flap */
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 58%;
+  background: #dda8a5;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    50% 100%
+  );
+  transform-origin: top center;
+  transition: transform 1s ease;
+  z-index: 5;
+}
+
+/* Opening animation */
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  transform: translateY(-145px);
+}
+
+.envelope.open {
+  cursor: default;
+}
+
+/* Final letter */
+
+.final-letter {
+  max-width: 600px;
+  margin: 150px auto 0;
+  background: #fffdf5;
+  padding: 50px 45px;
+  text-align: left;
+  box-shadow: 0 12px 35px rgba(80, 45, 45, 0.15);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+  pointer-events: none;
+}
+
+.final-letter.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.final-letter h2 {
+  text-align: center;
+  font-weight: normal;
+  margin-bottom: 35px;
+  color: #765858;
+}
+
+.final-letter p {
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.signature {
+  text-align: right;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+  .envelope-area {
+    width: 300px;
+  }
+
+  .envelope {
+    width: 290px;
+    height: 190px;
+  }
+
+  .envelope-title {
+    top: 50px;
+    font-size: 17px;
+  }
+
+  .seal-heart {
+    bottom: 30px;
+  }
+
+  .heart.one {
+    left: -10px;
+  }
+
+  .heart.two {
+    right: -10px;
+  }
+
+  .heart.three {
+    left: 0;
+  }
+
+  .heart.four {
+    right: 0;
+  }
+
+  .final-letter {
+    padding: 35px 25px;
+  }
+
+  .final-letter p {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+  <div class="instruction" id="instruction">
+    ♡ Click the envelope to open ♡
+  </div>
+
+  <div class="envelope-area">
+
+    <span class="heart one">♡</span>
+    <span class="heart two">♡</span>
+    <span class="heart three">♡</span>
+    <span class="heart four">♡</span>
+    <span class="heart five">♡</span>
+    <span class="heart six">♡</span>
+
+    <div class="envelope" id="envelope">
+
+      <div class="envelope-body"></div>
+
+      <div class="letter">
+        <h1>For You ♡</h1>
+        <p>A little something from me...</p>
+      </div>
+
+      <div class="envelope-title">
+        For when you're mad at me 😣💔
+      </div>
+
+      <div class="seal-heart">
+        ♥
+      </div>
+
+      <div class="flap"></div>
+
+    </div>
+
+  </div>
+
+  <div class="final-letter" id="finalLetter">
+
+    <h2>For When You're Mad at Me 😣💔</h2>
+
+    <p>My love,</p>
+
+    <p>
+      If you're reading this, You're probably mad
+      And before anything else, I want you to know that I'm not writing this
+      to tell you that you shouldn't be angry.
+    </p>
+
+    <p>
+      If I hurt you, disappointed you, or made you feel like I wasn't listening,
+      then you have every right to feel what you feel.
+      I don't want to make your feelings smaller just because I wish things
+      had gone differently.
+    </p>
+
+    <p>
+      And I know that sometimes saying “I'm sorry” isn't enough.
+      Especially when I make the same mistake again.
+      I know how frustrating that must be — to hear my apology and then
+      have to deal with the same thing all over again.
+    </p>
+
+    <p>
+      I don't want you to think that because I repeat a mistake,
+      I don't care about how it affects you.
+      I do.
+      Probably more than I know how to put into words.
+    </p>
+
+    <p>
+      Sometimes I don't realize how deeply something has hurt you until
+      I see it from your side, and I'm sorry for the times I've made you
+      feel unheard, unimportant, or taken for granted.
+    </p>
+
+    <p>
+      I'm not going to promise that I'll suddenly become perfect,
+      because you know me well enough to know that would be a lie. 
+      But I can promise that I want to keep trying.
+    </p>
+
+    <p>
+      I want to learn from the things that hurt you.
+      I want my apologies to become actions, not just words.
+      And I want to become someone who makes you feel loved,
+      not someone you constantly have to explain your hurt to.
+    </p>
+
+    <p>
+      If you're angry right now, it's okay.
+      Take your time.
+      You don't have to forgive me immediately.
+      You don't even have to smile at this stupid little letter yet.
+    </p>
+
+    <p>
+      But whenever you're ready, I hope you remember one thing:
+      I never want one of my mistakes to make you question
+      how much you mean to me.
+    </p>
+
+    <p>
+      Because you mean so much to me.
+      More than our silly arguments.
+      More than the moments when we misunderstand each other.
+      More than our ego could ever be worth.
+    </p>
+
+    <p>
+      I don't want to win an argument with you.
+      I'd rather understand you.
+      I'd rather fix things with you.
+      I'd rather sit beside you after we've both calmed down,
+      hold your hand, and find our way back to each other.
+    </p>
+
+    <p>
+      So if you're still mad at me after reading this...
+      okay. 😭
+      I'll give you your space.
+      But just know that somewhere in that space,
+      there is a girl who is thinking about you,
+      wishing she could take back the moment that hurt you,
+      and hoping she gets the chance to do better.
+    </p>
+
+    <p>
+      I'm sorry for the times I've hurt you.
+      I'm sorry for the times I've made you repeat yourself.
+      And I'm sorry for the mistakes I haven't learned from quickly enough.
+    </p>
+
+    <p>
+      Thank you for being patient with me,
+      even when I haven't made it easy.
+    </p>
+
+    <p>
+      I can't promise you a relationship without mistakes.
+      But I can promise you that I will never stop caring about
+      the person on the other side of them.
+    </p>
+
+    <p>
+      And when you're ready...
+      come hold my hand again. ♡
+    </p>
+
+    <p class="signature">
+      Still yours,<br>
+      Cecily ♡
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+
+const envelope = document.getElementById("envelope");
+const finalLetter = document.getElementById("finalLetter");
+const instruction = document.getElementById("instruction");
+
+envelope.addEventListener("click", function() {
+
+  if (envelope.classList.contains("open")) return;
+
+  envelope.classList.add("open");
+
+  instruction.innerHTML = "♡ Your letter is opening... ♡";
+
+  setTimeout(function() {
+
+    finalLetter.classList.add("show");
+
+    instruction.innerHTML =
+      "♡ A little piece of me, for you ♡";
+
+  }, 1000);
+
+});
+
+</script>
+
+</body>
+</html>
